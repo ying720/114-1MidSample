@@ -73,6 +73,10 @@ Ans:**index.html 輸出部分**<br>
 2. b.
 
 Ans:
+***輸入「/」時該輸出的畫面。***<br>
+![alt text](image-3.png)<br>
+***當輸入「/calculator」時該輸出的畫面。***<br>
+![alt text](image-4.png)<br>
 
 2. c.
 

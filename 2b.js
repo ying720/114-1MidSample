@@ -32,6 +32,11 @@ http.createServer((req, res) => {
   // req (request): 請求物件，包含客戶端發送的所有資訊（URL、標頭等）
   // res (response): 回應物件，用於向客戶端發送回應（HTML、狀態碼等）
 
+
+// *** 請在這裡新增這行程式碼來定義 url 變數 ***
+    const url = req.url;
+
+
   // ==========================================
   // 步驟 1: URL 路由與頁面分派
   // ==========================================
@@ -42,9 +47,20 @@ http.createServer((req, res) => {
   let filePath = '';
   let fileOtherFile = '';
 
-  // Switch根據不同路由要寫的部分
-
-
+  
+// Switch根據不同路由要寫的部分
+  switch (url) {
+    case '/':
+      // 輸出 index.ejs 檔案中的畫面 (圖二) 
+      filePath = './index.ejs'; // <--- 【路徑前明確加上 ./】
+      break;
+    case '/calculator':
+        filePath = './index2.ejs'; // <--- 【路徑前明確加上 ./】
+        break;
+    default:
+      filePath = './index3.ejs'; // <--- 【路徑前明確加上 ./】
+    break;
+}
 
 
 
@@ -121,7 +137,7 @@ http.createServer((req, res) => {
     //   (err, template): 回調函數的參數
     //                    err: 錯誤物件（若成功則為 null）
     //                    template: 讀取到的文件內容（字串）
-    fs.readFile(('.' + filePath), 'utf8', (err, template) => {
+    fs.readFile((filePath), 'utf8', (err, template) => {
 
       // 錯誤處理：檢查文件是否讀取失敗
       if (err) {
