@@ -46,9 +46,9 @@ http.createServer((req, res) => {
   // fileOtherFile: 儲存靜態資源（CSS、JS 等）的路徑
   let filePath = '';
   let fileOtherFile = '';
+  let responseStatus = 200; // 預設狀態碼為 200
 
-  
-// Switch根據不同路由要寫的部分
+  // Switch根據不同路由要寫的部分
   switch (url) {
     case '/':
       // 輸出 index.ejs 檔案中的畫面 (圖二) 
@@ -59,6 +59,7 @@ http.createServer((req, res) => {
         break;
     default:
       filePath = './index3.ejs'; // <--- 【路徑前明確加上 ./】
+      responseStatus = 404; // 設定狀態碼 404 (找不到資源)
     break;
 }
 
@@ -186,7 +187,7 @@ http.createServer((req, res) => {
     // 注意：這裡「沒有」指定 'utf8' 編碼
     // 原因：某些文件是二進制格式（如圖片、字型），不能用文字方式讀取
     // fs.readFile 會以 Buffer 格式讀取文件（可處理任何類型的文件）
-    fs.readFile(staticFilePath, (err, content) => {
+    fs.readFile('./index3.ejs', 'utf8', (err, content) => {
 
       // 檢查靜態文件是否讀取失敗
       if (err) {
@@ -203,10 +204,12 @@ http.createServer((req, res) => {
         // 向客戶端發送 404 錯誤訊息
         res.end('404 - 找不到文件：');
 
+        // 如果連 404 頁面都讀取失敗，則退回到最簡單的 404 文本
+
       } else {
-        // ------------------------------------------
-        // 靜態文件讀取成功 → 直接發送文件內容
-        // ------------------------------------------
+      // ------------------------------------------
+      // 靜態文件讀取成功 → 直接發送文件內容
+      // ------------------------------------------
 
         // 設定 HTTP 狀態碼 200（成功）
         // Content-Type 根據文件副檔名自動設定（從 contentTypes 映射表查詢）
