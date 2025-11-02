@@ -64,8 +64,12 @@ Ans:
 
 2. a.
 
-Ans:
-
+Ans:**index.html 輸出部分**<br>
+![alt text](image.png)<br>
+**index2.html 輸出的部分**<br>
+![alt text](image-1.png)<br>
+**error.html 輸出的部分**<br>
+![alt text](image-2.png)<br>
 2. b.
 
 Ans:
